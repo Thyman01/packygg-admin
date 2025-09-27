@@ -20,7 +20,7 @@ import { Loader2 } from "lucide-react"
 
 const formSchema = z.object({
   set_name: z.string().min(1, "Set name is required").max(100, "Set name must be less than 100 characters"),
-  card_amount: z.coerce.number().min(1, "Card amount must be at least 1").max(10000, "Card amount must be less than 10,000"),
+  card_amount: z.number().min(1, "Card amount must be at least 1").max(10000, "Card amount must be less than 10,000"),
   release_date: z.string().min(1, "Release date is required"),
   logo_url: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   background_url: z.string().url("Must be a valid URL").optional().or(z.literal("")),
@@ -128,7 +128,8 @@ export function EditSetForm({ set, onSuccess }: EditSetFormProps) {
                   <Input 
                     type="number" 
                     placeholder="Enter number of cards" 
-                    {...field} 
+                    {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
                   />
                 </FormControl>
                 <FormMessage />
@@ -167,7 +168,7 @@ export function EditSetForm({ set, onSuccess }: EditSetFormProps) {
                 />
               </FormControl>
               <FormDescription>
-                Optional: URL to the set's logo image
+                Optional: URL to the set&apos;s logo image
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -188,7 +189,7 @@ export function EditSetForm({ set, onSuccess }: EditSetFormProps) {
                 />
               </FormControl>
               <FormDescription>
-                Optional: URL to the set's background image
+                Optional: URL to the set&apos;s background image
               </FormDescription>
               <FormMessage />
             </FormItem>

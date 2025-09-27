@@ -86,7 +86,7 @@ export default function Home() {
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                   <div className="flex-1 space-y-1">
                     <p className="text-sm font-medium leading-none">
-                      New set "Base Set 2" added
+                      New set &quot;Base Set 2&quot; added
                     </p>
                     <p className="text-sm text-muted-foreground">
                       2 hours ago
@@ -97,7 +97,7 @@ export default function Home() {
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <div className="flex-1 space-y-1">
                     <p className="text-sm font-medium leading-none">
-                      Set "Jungle" updated
+                      Set &quot;Jungle&quot; updated
                     </p>
                     <p className="text-sm text-muted-foreground">
                       4 hours ago

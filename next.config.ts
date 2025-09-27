@@ -1,12 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable experimental features for better performance
-  experimental: {
-    // Enable server components by default
-    serverComponentsExternalPackages: ['@supabase/supabase-js'],
-  },
-  
   // Optimize images for Vercel
   images: {
     remotePatterns: [
@@ -27,9 +21,6 @@ const nextConfig: NextConfig = {
   
   // Enable compression
   compress: true,
-  
-  // Optimize bundle
-  swcMinify: true,
   
   // Security headers
   async headers() {

@@ -2,7 +2,6 @@
 
 import { Header } from "@/components/header"
 import { Sidebar } from "@/components/sidebar"
-import { cn } from "@/lib/utils"
 
 interface DashboardLayoutProps {
   children: React.ReactNode

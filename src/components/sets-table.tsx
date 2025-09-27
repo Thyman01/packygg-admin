@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Set } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -261,9 +262,11 @@ export function SetsTable({ onSetAdded, onSetUpdated, onSetDeleted }: SetsTableP
                   <div>
                     <label className="text-sm font-medium text-muted-foreground">Background</label>
                     <div className="mt-2">
-                      <img 
+                      <Image 
                         src={selectedSet.background_url} 
                         alt="Set background" 
+                        width={400}
+                        height={128}
                         className="w-full h-32 object-cover rounded-md"
                       />
                     </div>
