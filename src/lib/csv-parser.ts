@@ -68,7 +68,6 @@ function parseCSVLine(line: string): string[] {
 export function convertCSVRowToCardData(row: CSVCardRow, setId: string): CreateCardData {
   // Only include fields that exist in the actual database schema
   const cardData: CreateCardData = {
-    card_id: row['Card ID'],
     set_id: setId,
     card_name: row['Card Name'],
     card_number: row['Card Number'],
@@ -119,7 +118,6 @@ export function convertCSVRowToCardData(row: CSVCardRow, setId: string): CreateC
 
 export function validateCSVHeaders(headers: string[]): boolean {
   const requiredHeaders = [
-    'Card ID',
     'Set Name', 
     'Card Name',
     'Card Number',

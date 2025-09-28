@@ -118,7 +118,6 @@ This guide will help you deploy your PackyGG Admin Dashboard to Vercel.
    -- Create cards table (matching actual database schema)
    CREATE TABLE cards (
      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-     card_id TEXT NOT NULL,
      set_id UUID NOT NULL REFERENCES sets(id) ON DELETE CASCADE,
      card_name TEXT NOT NULL,
      card_number TEXT NOT NULL,
@@ -139,7 +138,6 @@ This guide will help you deploy your PackyGG Admin Dashboard to Vercel.
 
    -- Create indexes for better performance
    CREATE INDEX idx_cards_set_id ON cards(set_id);
-   CREATE INDEX idx_cards_card_id ON cards(card_id);
    CREATE INDEX idx_cards_card_name ON cards(card_name);
    ```
 

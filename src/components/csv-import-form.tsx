@@ -294,7 +294,6 @@ export function CSVImportForm({ onSuccess }: CSVImportFormProps) {
           <div>
             <h4 className="font-medium mb-2">Required Columns:</h4>
             <div className="grid grid-cols-2 gap-2 text-sm">
-              <div>• Card ID</div>
               <div>• Card Name</div>
               <div>• Card Number</div>
               <div>• Rarity</div>

@@ -33,7 +33,6 @@ export interface UpdateSetData extends Partial<CreateSetData> {
 // Types for the cards table (matching actual database schema)
 export interface Card {
   id: string
-  card_id: string
   set_id: string
   card_name: string
   card_number: string
@@ -53,7 +52,6 @@ export interface Card {
 }
 
 export interface CreateCardData {
-  card_id: string
   set_id: string
   card_name: string
   card_number: string
