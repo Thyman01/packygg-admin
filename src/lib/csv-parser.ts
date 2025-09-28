@@ -66,24 +66,55 @@ function parseCSVLine(line: string): string[] {
 }
 
 export function convertCSVRowToCardData(row: CSVCardRow, setId: string): CreateCardData {
-  return {
+  // Only include fields that exist in the actual database schema
+  const cardData: CreateCardData = {
     card_id: row['Card ID'],
     set_id: setId,
     card_name: row['Card Name'],
     card_number: row['Card Number'],
     rarity: row['Rarity'],
     image_url: row['Image URL'],
-    tcgplayer_url: row['TCGPlayer URL'] || undefined,
-    cardmarket_url: row['Cardmarket URL'] || undefined,
-    usd_price: parseFloat(row['USD Price']) || undefined,
-    eur_price: parseFloat(row['EUR Price']) || undefined,
-    hp: parseInt(row['HP']) || undefined,
-    variant_type: row['Variant Type'] || undefined,
-    variant_id: row['Variant ID'] || undefined,
-    is_base_card: row['Is Base Card'].toLowerCase() === 'true',
-    base_card_id: row['Base Card ID'] || undefined,
-    variants_json: row['Variants (JSON)'] || undefined,
   }
+
+  // Add optional fields only if they have values (all as strings since DB uses text type)
+  if (row['TCGPlayer URL'] && row['TCGPlayer URL'].trim()) {
+    cardData.tcgplayer_url = row['TCGPlayer URL']
+  }
+  
+  if (row['Cardmarket URL'] && row['Cardmarket URL'].trim()) {
+    cardData.cardmarket_url = row['Cardmarket URL']
+  }
+  
+  if (row['USD Price'] && row['USD Price'].trim()) {
+    cardData.usd_price = row['USD Price']
+  }
+  
+  if (row['EUR Price'] && row['EUR Price'].trim()) {
+    cardData.eur_price = row['EUR Price']
+  }
+  
+  if (row['HP'] && row['HP'].trim()) {
+    cardData.hp = row['HP']
+  }
+
+  // Map CSV fields to actual database columns
+  // Note: These fields might not exist in your CSV, but we'll handle them if they do
+  if (row['Variant Type'] && row['Variant Type'].trim()) {
+    // Map Variant Type to player field if that makes sense for your data
+    cardData.player = row['Variant Type']
+  }
+  
+  if (row['Variant ID'] && row['Variant ID'].trim()) {
+    // Map Variant ID to card_model field if that makes sense for your data
+    cardData.card_model = row['Variant ID']
+  }
+  
+  if (row['Card Number'] && row['Card Number'].trim()) {
+    // Use card_number for the number field as well if needed
+    cardData.number = row['Card Number']
+  }
+
+  return cardData
 }
 
 export function validateCSVHeaders(headers: string[]): boolean {

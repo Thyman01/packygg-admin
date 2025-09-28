@@ -30,7 +30,7 @@ export interface UpdateSetData extends Partial<CreateSetData> {
   id: string
 }
 
-// Types for the cards table
+// Types for the cards table (matching actual database schema)
 export interface Card {
   id: string
   card_id: string
@@ -41,14 +41,13 @@ export interface Card {
   image_url: string
   tcgplayer_url?: string
   cardmarket_url?: string
-  usd_price?: number
-  eur_price?: number
-  hp?: number
-  variant_type?: string
-  variant_id?: string
-  is_base_card: boolean
-  base_card_id?: string
-  variants_json?: string
+  usd_price?: string
+  eur_price?: string
+  hp?: string
+  player?: string
+  card_model?: string
+  number?: string
+  euro_price?: string
   created_at: string
   updated_at: string
 }
@@ -62,14 +61,13 @@ export interface CreateCardData {
   image_url: string
   tcgplayer_url?: string
   cardmarket_url?: string
-  usd_price?: number
-  eur_price?: number
-  hp?: number
-  variant_type?: string
-  variant_id?: string
-  is_base_card: boolean
-  base_card_id?: string
-  variants_json?: string
+  usd_price?: string
+  eur_price?: string
+  hp?: string
+  player?: string
+  card_model?: string
+  number?: string
+  euro_price?: string
 }
 
 export interface UpdateCardData extends Partial<CreateCardData> {

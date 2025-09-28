@@ -115,7 +115,7 @@ This guide will help you deploy your PackyGG Admin Dashboard to Vercel.
      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
    );
 
-   -- Create cards table
+   -- Create cards table (matching actual database schema)
    CREATE TABLE cards (
      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
      card_id TEXT NOT NULL,
@@ -126,14 +126,13 @@ This guide will help you deploy your PackyGG Admin Dashboard to Vercel.
      image_url TEXT NOT NULL,
      tcgplayer_url TEXT,
      cardmarket_url TEXT,
-     usd_price DECIMAL(10,2),
-     eur_price DECIMAL(10,2),
-     hp INTEGER,
-     variant_type TEXT,
-     variant_id TEXT,
-     is_base_card BOOLEAN DEFAULT true,
-     base_card_id TEXT,
-     variants_json TEXT,
+     usd_price TEXT,
+     eur_price TEXT,
+     hp TEXT,
+     player TEXT,
+     card_model TEXT,
+     number TEXT,
+     euro_price TEXT,
      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
      updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
    );
