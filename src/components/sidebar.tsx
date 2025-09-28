@@ -10,7 +10,8 @@ import {
   Settings, 
   BarChart3,
   Users,
-  Upload
+  Upload,
+  CreditCard
 } from "lucide-react"
 
 const navigation = [
@@ -23,6 +24,11 @@ const navigation = [
     name: "Sets",
     href: "/sets",
     icon: Package,
+  },
+  {
+    name: "Cards",
+    href: "/cards",
+    icon: CreditCard,
   },
   {
     name: "Import Cards",
