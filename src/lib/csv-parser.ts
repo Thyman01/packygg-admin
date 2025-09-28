@@ -66,54 +66,32 @@ function parseCSVLine(line: string): string[] {
 }
 
 export function convertCSVRowToCardData(row: CSVCardRow, setId: string): CreateCardData {
-  // Only include fields that exist in the actual database schema
+  // Map CSV fields to actual Drizzle schema columns
   const cardData: CreateCardData = {
     set_id: setId,
-    card_name: row['Card Name'],
-    card_number: row['Card Number'],
-    rarity: row['Rarity'],
-    image_url: row['Image URL'],
-  }
-
-  // Add optional fields only if they have values (all as strings since DB uses text type)
-  if (row['TCGPlayer URL'] && row['TCGPlayer URL'].trim()) {
-    cardData.tcgplayer_url = row['TCGPlayer URL']
-  }
-  
-  if (row['Cardmarket URL'] && row['Cardmarket URL'].trim()) {
-    cardData.cardmarket_url = row['Cardmarket URL']
-  }
-  
-  if (row['USD Price'] && row['USD Price'].trim()) {
-    cardData.usd_price = row['USD Price']
-  }
-  
-  if (row['EUR Price'] && row['EUR Price'].trim()) {
-    cardData.eur_price = row['EUR Price']
-  }
-  
-  if (row['HP'] && row['HP'].trim()) {
-    cardData.hp = row['HP']
-  }
-
-  // Map CSV fields to actual database columns
-  // Note: These fields might not exist in your CSV, but we'll handle them if they do
-  if (row['Variant Type'] && row['Variant Type'].trim()) {
-    // Map Variant Type to player field if that makes sense for your data
-    cardData.player = row['Variant Type']
-  }
-  
-  if (row['Variant ID'] && row['Variant ID'].trim()) {
-    // Map Variant ID to card_model field if that makes sense for your data
-    cardData.card_model = row['Variant ID']
-  }
-  
-  if (row['Card Number'] && row['Card Number'].trim()) {
-    // Use card_number for the number field as well if needed
-    cardData.number = row['Card Number']
+    name: row['Card Name'] || '',
+    slug: generateSlug(row['Card Name'] || row['Card Number'] || ''),
+    image: row['Image URL'] || '',
+    rarity: row['Rarity'] || '',
+    hp: row['HP'] || '',
+    tcg_player: row['TCGPlayer URL'] || '',
+    card_market: row['Cardmarket URL'] || '',
+    number: row['Card Number'] || '',
+    euro_price: row['EUR Price'] || '',
+    usd_price: row['USD Price'] || '',
   }
 
   return cardData
+}
+
+// Helper function to generate a slug from card name
+function generateSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single
+    .trim()
 }
 
 export function validateCSVHeaders(headers: string[]): boolean {

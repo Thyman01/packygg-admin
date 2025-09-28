@@ -309,10 +309,6 @@ export function CSVImportForm({ onSuccess }: CSVImportFormProps) {
               <div>• USD Price</div>
               <div>• EUR Price</div>
               <div>• HP</div>
-              <div>• Variant Type (→ player)</div>
-              <div>• Variant ID (→ card_model)</div>
-              <div>• Euro Price</div>
-              <div>• Number</div>
             </div>
           </div>
         </CardContent>

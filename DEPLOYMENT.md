@@ -115,30 +115,28 @@ This guide will help you deploy your PackyGG Admin Dashboard to Vercel.
      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
    );
 
-   -- Create cards table (matching actual database schema)
+   -- Create cards table (matching actual Drizzle schema)
    CREATE TABLE cards (
      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-     set_id UUID NOT NULL REFERENCES sets(id) ON DELETE CASCADE,
-     card_name TEXT NOT NULL,
-     card_number TEXT NOT NULL,
+     set_id UUID NOT NULL REFERENCES sets(id) ON DELETE RESTRICT,
+     name TEXT NOT NULL,
+     slug TEXT NOT NULL,
+     image TEXT NOT NULL,
      rarity TEXT NOT NULL,
-     image_url TEXT NOT NULL,
-     tcgplayer_url TEXT,
-     cardmarket_url TEXT,
-     usd_price TEXT,
-     eur_price TEXT,
-     hp TEXT,
-     player TEXT,
-     card_model TEXT,
-     number TEXT,
-     euro_price TEXT,
-     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+     hp TEXT NOT NULL,
+     tcg_player TEXT NOT NULL,
+     card_market TEXT NOT NULL,
+     number TEXT NOT NULL,
+     euro_price TEXT NOT NULL,
+     usd_price TEXT NOT NULL,
+     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
    );
 
    -- Create indexes for better performance
    CREATE INDEX idx_cards_set_id ON cards(set_id);
-   CREATE INDEX idx_cards_card_name ON cards(card_name);
+   CREATE INDEX idx_cards_name ON cards(name);
+   CREATE INDEX idx_cards_slug ON cards(slug);
    ```
 
 4. **Enable Row Level Security (RLS) if needed**:

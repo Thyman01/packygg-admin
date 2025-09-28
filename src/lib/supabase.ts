@@ -30,42 +30,36 @@ export interface UpdateSetData extends Partial<CreateSetData> {
   id: string
 }
 
-// Types for the cards table (matching actual database schema)
+// Types for the cards table (matching actual Drizzle schema)
 export interface Card {
   id: string
   set_id: string
-  card_name: string
-  card_number: string
+  name: string
+  slug: string
+  image: string
   rarity: string
-  image_url: string
-  tcgplayer_url?: string
-  cardmarket_url?: string
-  usd_price?: string
-  eur_price?: string
-  hp?: string
-  player?: string
-  card_model?: string
-  number?: string
-  euro_price?: string
+  hp: string
+  tcg_player: string
+  card_market: string
+  number: string
+  euro_price: string
+  usd_price: string
   created_at: string
   updated_at: string
 }
 
 export interface CreateCardData {
   set_id: string
-  card_name: string
-  card_number: string
+  name: string
+  slug: string
+  image: string
   rarity: string
-  image_url: string
-  tcgplayer_url?: string
-  cardmarket_url?: string
-  usd_price?: string
-  eur_price?: string
-  hp?: string
-  player?: string
-  card_model?: string
-  number?: string
-  euro_price?: string
+  hp: string
+  tcg_player: string
+  card_market: string
+  number: string
+  euro_price: string
+  usd_price: string
 }
 
 export interface UpdateCardData extends Partial<CreateCardData> {
