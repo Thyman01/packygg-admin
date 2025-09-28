@@ -101,8 +101,9 @@ This guide will help you deploy your PackyGG Admin Dashboard to Vercel.
 
 2. **Navigate to SQL Editor**
 
-3. **Run the following SQL to create the sets table**:
+3. **Run the following SQL to create the tables**:
    ```sql
+   -- Create sets table
    CREATE TABLE sets (
      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
      set_name TEXT NOT NULL,
@@ -113,11 +114,40 @@ This guide will help you deploy your PackyGG Admin Dashboard to Vercel.
      series TEXT NOT NULL,
      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
    );
+
+   -- Create cards table
+   CREATE TABLE cards (
+     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+     card_id TEXT NOT NULL,
+     set_id UUID NOT NULL REFERENCES sets(id) ON DELETE CASCADE,
+     card_name TEXT NOT NULL,
+     card_number TEXT NOT NULL,
+     rarity TEXT NOT NULL,
+     image_url TEXT NOT NULL,
+     tcgplayer_url TEXT,
+     cardmarket_url TEXT,
+     usd_price DECIMAL(10,2),
+     eur_price DECIMAL(10,2),
+     hp INTEGER,
+     variant_type TEXT,
+     variant_id TEXT,
+     is_base_card BOOLEAN DEFAULT true,
+     base_card_id TEXT,
+     variants_json TEXT,
+     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+   );
+
+   -- Create indexes for better performance
+   CREATE INDEX idx_cards_set_id ON cards(set_id);
+   CREATE INDEX idx_cards_card_id ON cards(card_id);
+   CREATE INDEX idx_cards_card_name ON cards(card_name);
    ```
 
 4. **Enable Row Level Security (RLS) if needed**:
    ```sql
    ALTER TABLE sets ENABLE ROW LEVEL SECURITY;
+   ALTER TABLE cards ENABLE ROW LEVEL SECURITY;
    ```
 
 ## Step 5: Configure Custom Domain (Optional)

@@ -9,7 +9,8 @@ import {
   Package, 
   Settings, 
   BarChart3,
-  Users
+  Users,
+  Upload
 } from "lucide-react"
 
 const navigation = [
@@ -22,6 +23,11 @@ const navigation = [
     name: "Sets",
     href: "/sets",
     icon: Package,
+  },
+  {
+    name: "Import Cards",
+    href: "/import",
+    icon: Upload,
   },
   {
     name: "Analytics",
